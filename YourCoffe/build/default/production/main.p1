@@ -1,0 +1,366 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+"14 ./lcd.h
+[; ;./lcd.h: 14: void lcd_init(void);
+[v _lcd_init `(v ~T0 @X0 0 ef ]
+"15
+[; ;./lcd.h: 15: void lcd_cmd(unsigned char val);
+[v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
+"17
+[; ;./lcd.h: 17: void lcd_str(const char* str);
+[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"4 ./delay.h
+[; ;./delay.h: 4: void atraso_ms(int t);
+[v _atraso_ms `(v ~T0 @X0 0 ef1`i ]
+"6 ./yourcoffe.h
+[; ;./yourcoffe.h: 6: void scrollDisplay(char *linha1, char *linha2);
+[v _scrollDisplay `(v ~T0 @X0 0 ef2`*uc`*uc ]
+"5
+[; ;./yourcoffe.h: 5: char opcaoDesejada(char tipo);
+[v _opcaoDesejada `(uc ~T0 @X0 0 ef1`uc ]
+"33 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 33: char *strcpy (char *restrict, const char *restrict);
+[v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+"36
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c99\string.h: 36: char *strcat (char *restrict, const char *restrict);
+[v _strcat `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+"4 ./yourcoffe.h
+[; ;./yourcoffe.h: 4: void tempoPreparo(int segundos);
+[v _tempoPreparo `(v ~T0 @X0 0 ef1`i ]
+"38 ./config.h
+[p x OSC=HS ]
+"39
+[p x WDT=OFF ]
+"40
+[p x LVP=OFF ]
+"41
+[p x DEBUG = OFF ]
+"42
+[p x WDTPS = 1 ]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"9 main.c
+[; ;main.c: 9: void main(void)
+[v _main `(v ~T0 @X0 1 ef ]
+"10
+[; ;main.c: 10: {
+{
+[e :U _main ]
+[f ]
+"11
+[; ;main.c: 11:     unsigned char i, tempo;
+[v _i `uc ~T0 @X0 1 a ]
+[v _tempo `uc ~T0 @X0 1 a ]
+"12
+[; ;main.c: 12:     unsigned char cafe, tamanho, corfirmar;
+[v _cafe `uc ~T0 @X0 1 a ]
+[v _tamanho `uc ~T0 @X0 1 a ]
+[v _corfirmar `uc ~T0 @X0 1 a ]
+[v F197 `uc ~T0 @X0 -> 10 `i t ]
+[v F196 `F197 ~T0 @X0 -> 5 `i s ]
+[i F196
+:U ..
+:U ..
+"13
+[; ;main.c: 13:     unsigned char cafes[5][10] = {"EXPRESSO", "AMERICANO", "CAPUCCINO", "LATTE"};
+-> 69 `c
+-> 88 `c
+-> 80 `c
+-> 82 `c
+-> 69 `c
+-> 83 `c
+-> 83 `c
+-> 79 `c
+-> 0 `c
+..
+:U ..
+-> 65 `c
+-> 77 `c
+-> 69 `c
+-> 82 `c
+-> 73 `c
+-> 67 `c
+-> 65 `c
+-> 78 `c
+-> 79 `c
+-> 0 `c
+..
+:U ..
+-> 67 `c
+-> 65 `c
+-> 80 `c
+-> 85 `c
+-> 67 `c
+-> 67 `c
+-> 73 `c
+-> 78 `c
+-> 79 `c
+-> 0 `c
+..
+:U ..
+-> 76 `c
+-> 65 `c
+-> 84 `c
+-> 84 `c
+-> 69 `c
+-> 0 `c
+..
+..
+]
+[v F199 `uc ~T0 @X0 -> 10 `i t ]
+[v _cafes `F199 ~T0 @X0 -> 5 `i a ]
+[e = _cafes F196 ]
+[v F201 `uc ~T0 @X0 -> 8 `i t ]
+[v F200 `F201 ~T0 @X0 -> 2 `i s ]
+[i F200
+:U ..
+:U ..
+"14
+[; ;main.c: 14:     unsigned char tamanhos[2][8] = {"90ml" , "150ml"};
+-> 57 `c
+-> 48 `c
+-> 109 `c
+-> 108 `c
+-> 0 `c
+..
+:U ..
+-> 49 `c
+-> 53 `c
+-> 48 `c
+-> 109 `c
+-> 108 `c
+-> 0 `c
+..
+..
+]
+[v F203 `uc ~T0 @X0 -> 8 `i t ]
+[v _tamanhos `F203 ~T0 @X0 -> 2 `i a ]
+[e = _tamanhos F200 ]
+"17
+[; ;main.c: 17:     (*(volatile __near unsigned char*)0xFC1) = 0x06;
+[e = *U -> -> 4033 `i `*VNuc -> -> 6 `i `uc ]
+"18
+[; ;main.c: 18:     (*(volatile __near unsigned char*)0xF95) = 0x00;
+[e = *U -> -> 3989 `i `*VNuc -> -> 0 `i `uc ]
+"19
+[; ;main.c: 19:     (*(volatile __near unsigned char*)0xF96) = 0x00;
+[e = *U -> -> 3990 `i `*VNuc -> -> 0 `i `uc ]
+"20
+[; ;main.c: 20:     (*(volatile __near unsigned char*)0xF93) = 0x01;
+[e = *U -> -> 3987 `i `*VNuc -> -> 1 `i `uc ]
+"23
+[; ;main.c: 23:     (*(volatile __near unsigned char*)0xF93) = 0xF8;
+[e = *U -> -> 3987 `i `*VNuc -> -> 248 `i `uc ]
+"25
+[; ;main.c: 25:     lcd_init();
+[e ( _lcd_init ..  ]
+"27
+[; ;main.c: 27:     for(;;)
+{
+[e :U 3 ]
+"28
+[; ;main.c: 28:     {
+{
+"29
+[; ;main.c: 29:         (*(volatile __near unsigned char*)0xFC1) = 0x06;
+[e = *U -> -> 4033 `i `*VNuc -> -> 6 `i `uc ]
+"30
+[; ;main.c: 30:         (*(volatile __near unsigned char*)0xF95) = 0x00;
+[e = *U -> -> 3989 `i `*VNuc -> -> 0 `i `uc ]
+"31
+[; ;main.c: 31:         (*(volatile __near unsigned char*)0xF96) = 0x00;
+[e = *U -> -> 3990 `i `*VNuc -> -> 0 `i `uc ]
+"32
+[; ;main.c: 32:         (*(volatile __near unsigned char*)0xF93) = 0x01;
+[e = *U -> -> 3987 `i `*VNuc -> -> 1 `i `uc ]
+"34
+[; ;main.c: 34:         (*(volatile __near unsigned char*)0xF93) = 0xF8;
+[e = *U -> -> 3987 `i `*VNuc -> -> 248 `i `uc ]
+"36
+[; ;main.c: 36:         lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"37
+[; ;main.c: 37:         lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"38
+[; ;main.c: 38:         lcd_str("   Y0URC0FF3 ");
+[e ( _lcd_str (1 :s 1C ]
+"39
+[; ;main.c: 39:         lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"40
+[; ;main.c: 40:         lcd_str("ESCOLHA SEU CAFE");
+[e ( _lcd_str (1 :s 2C ]
+"41
+[; ;main.c: 41:         atraso_ms(2000);
+[e ( _atraso_ms (1 -> 2000 `i ]
+"43
+[; ;main.c: 43:         do
+[e :U 8 ]
+"44
+[; ;main.c: 44:         {
+{
+"45
+[; ;main.c: 45:             scrollDisplay("(1) expresso  (2) americano", "(3) capuccino (4) latte       ");
+[e ( _scrollDisplay (2 , :s 3C :s 4C ]
+"46
+[; ;main.c: 46:             cafe = opcaoDesejada('1');
+[e = _cafe -> ( _opcaoDesejada (1 -> -> 49 `ui `uc `uc ]
+"48
+[; ;main.c: 48:             char frase[50];
+[v _frase `uc ~T0 @X0 -> 50 `i a ]
+"50
+[; ;main.c: 50:             switch (cafe)
+[e $U 10  ]
+"51
+[; ;main.c: 51:             {
+{
+"52
+[; ;main.c: 52:                 case '1':
+[e :U 11 ]
+"53
+[; ;main.c: 53:                     strcpy(frase, "TAMANHO DO EXPRESSO");
+[e ( _strcpy (2 , &U _frase :s 5C ]
+"54
+[; ;main.c: 54:                     tempo = 30;
+[e = _tempo -> -> 30 `i `uc ]
+"55
+[; ;main.c: 55:                     break;
+[e $U 9  ]
+"56
+[; ;main.c: 56:                 case '2':
+[e :U 12 ]
+"57
+[; ;main.c: 57:                     strcpy(frase, "TAMANHO DO AMERICANO");
+[e ( _strcpy (2 , &U _frase :s 6C ]
+"58
+[; ;main.c: 58:                     tempo = 50;
+[e = _tempo -> -> 50 `i `uc ]
+"59
+[; ;main.c: 59:                     break;
+[e $U 9  ]
+"60
+[; ;main.c: 60:                 case '3':
+[e :U 13 ]
+"61
+[; ;main.c: 61:                     strcpy(frase, "TAMANHO DO CAPUCCINO");
+[e ( _strcpy (2 , &U _frase :s 7C ]
+"62
+[; ;main.c: 62:                     tempo = 60;
+[e = _tempo -> -> 60 `i `uc ]
+"63
+[; ;main.c: 63:                     break;
+[e $U 9  ]
+"64
+[; ;main.c: 64:                 case '4':
+[e :U 14 ]
+"65
+[; ;main.c: 65:                     strcpy(frase, "TAMANHO DO LATTE");
+[e ( _strcpy (2 , &U _frase :s 8C ]
+"66
+[; ;main.c: 66:                     tempo = 40;
+[e = _tempo -> -> 40 `i `uc ]
+"67
+[; ;main.c: 67:                     break;
+[e $U 9  ]
+"68
+[; ;main.c: 68:             }
+}
+[e $U 9  ]
+[e :U 10 ]
+[e [\ -> _cafe `i , $ -> -> 49 `ui `i 11
+ , $ -> -> 50 `ui `i 12
+ , $ -> -> 51 `ui `i 13
+ , $ -> -> 52 `ui `i 14
+ 9 ]
+[e :U 9 ]
+"70
+[; ;main.c: 70:             scrollDisplay(frase, "(1)90 ml (2)150 ml            ");
+[e ( _scrollDisplay (2 , &U _frase :s 9C ]
+"72
+[; ;main.c: 72:             tamanho = opcaoDesejada('2');
+[e = _tamanho -> ( _opcaoDesejada (1 -> -> 50 `ui `uc `uc ]
+"78
+[; ;main.c: 78:             strcpy(frase,cafes[(cafe - '0') - 1]);
+[e ( _strcpy (2 , &U _frase -> &U *U + &U _cafes * -> - - -> _cafe `ui -> 48 `ui -> -> 1 `i `ui `ux -> * -> # *U &U *U &U _cafes `ui -> -> 10 `i `ui `ux `*Cuc ]
+"79
+[; ;main.c: 79:             strcat(frase," ");
+[e ( _strcat (2 , &U _frase :s 10C ]
+"80
+[; ;main.c: 80:             strcat(frase, tamanhos[(tamanho - '0')- 1]);
+[e ( _strcat (2 , &U _frase -> &U *U + &U _tamanhos * -> - - -> _tamanho `ui -> 48 `ui -> -> 1 `i `ui `ux -> * -> # *U &U *U &U _tamanhos `ui -> -> 8 `i `ui `ux `*Cuc ]
+"82
+[; ;main.c: 82:             lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"83
+[; ;main.c: 83:             lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"84
+[; ;main.c: 84:             lcd_str(frase);
+[e ( _lcd_str (1 -> &U _frase `*Cuc ]
+"85
+[; ;main.c: 85:             lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"86
+[; ;main.c: 86:             lcd_str("(1)OK (2)CANCEL ");
+[e ( _lcd_str (1 :s 11C ]
+"89
+[; ;main.c: 89:             corfirmar = opcaoDesejada('3');
+[e = _corfirmar -> ( _opcaoDesejada (1 -> -> 51 `ui `uc `uc ]
+"91
+[; ;main.c: 91:         }while(corfirmar == '2');
+}
+[e $ == -> _corfirmar `ui -> 50 `ui 8  ]
+[e :U 7 ]
+"94
+[; ;main.c: 94:         if(tamanho == '2')
+[e $ ! == -> _tamanho `ui -> 50 `ui 15  ]
+"95
+[; ;main.c: 95:         tempo *= 1.2;
+[e =* _tempo .1.2 ]
+[e :U 15 ]
+"98
+[; ;main.c: 98:         lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"99
+[; ;main.c: 99:         lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"100
+[; ;main.c: 100:         lcd_str("PREPARANDO O ");
+[e ( _lcd_str (1 :s 12C ]
+"101
+[; ;main.c: 101:         lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"102
+[; ;main.c: 102:         lcd_str("CAFE DESEJADO    ");
+[e ( _lcd_str (1 :s 13C ]
+"104
+[; ;main.c: 104:         tempoPreparo(tempo);
+[e ( _tempoPreparo (1 -> _tempo `i ]
+"106
+[; ;main.c: 106:         scrollDisplay("SEU CAFE ESTA PRONTO", "Mais delicioso impossivel      ");
+[e ( _scrollDisplay (2 , :s 14C :s 15C ]
+"108
+[; ;main.c: 108:     }
+}
+[e $U 3  ]
+[e :U 4 ]
+}
+"109
+[; ;main.c: 109: }
+[e :UE 2 ]
+}
+[a 3C 40 49 41 32 101 120 112 114 101 115 115 111 32 32 40 50 41 32 97 109 101 114 105 99 97 110 111 0 ]
+[a 14C 83 69 85 32 67 65 70 69 32 69 83 84 65 32 80 82 79 78 84 79 0 ]
+[a 5C 84 65 77 65 78 72 79 32 68 79 32 69 88 80 82 69 83 83 79 0 ]
+[a 7C 84 65 77 65 78 72 79 32 68 79 32 67 65 80 85 67 67 73 78 79 0 ]
+[a 6C 84 65 77 65 78 72 79 32 68 79 32 65 77 69 82 73 67 65 78 79 0 ]
+[a 8C 84 65 77 65 78 72 79 32 68 79 32 76 65 84 84 69 0 ]
+[a 2C 69 83 67 79 76 72 65 32 83 69 85 32 67 65 70 69 0 ]
+[a 12C 80 82 69 80 65 82 65 78 68 79 32 79 32 0 ]
+[a 11C 40 49 41 79 75 32 40 50 41 67 65 78 67 69 76 32 0 ]
+[a 1C 32 32 32 89 48 85 82 67 48 70 70 51 32 0 ]
+[a 13C 67 65 70 69 32 68 69 83 69 74 65 68 79 32 32 32 32 0 ]
+[a 15C 77 97 105 115 32 100 101 108 105 99 105 111 115 111 32 105 109 112 111 115 115 105 118 101 108 32 32 32 32 32 32 0 ]
+[a 4C 40 51 41 32 99 97 112 117 99 99 105 110 111 32 40 52 41 32 108 97 116 116 101 32 32 32 32 32 32 32 0 ]
+[a 9C 40 49 41 57 48 32 109 108 32 40 50 41 49 53 48 32 109 108 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
+[a 10C 32 0 ]

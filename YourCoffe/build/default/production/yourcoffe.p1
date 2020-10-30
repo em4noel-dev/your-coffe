@@ -1,0 +1,471 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"15 ./lcd.h
+[; ;./lcd.h: 15: void lcd_cmd(unsigned char val);
+[v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
+"17
+[; ;./lcd.h: 17: void lcd_str(const char* str);
+[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"8 ./teclado.h
+[; ;./teclado.h: 8:     unsigned char tc_tecla(unsigned int timeout);
+[v _tc_tecla `(uc ~T0 @X0 0 ef1`ui ]
+"4 ./delay.h
+[; ;./delay.h: 4: void atraso_ms(int t);
+[v _atraso_ms `(v ~T0 @X0 0 ef1`i ]
+"38 ./config.h
+[p x OSC=HS ]
+"39
+[p x WDT=OFF ]
+"40
+[p x LVP=OFF ]
+"41
+[p x DEBUG = OFF ]
+"42
+[p x WDTPS = 1 ]
+"8 yourcoffe.c
+[; ;yourcoffe.c: 8: unsigned int atrasoMin = 20;
+[v _atrasoMin `ui ~T0 @X0 1 e ]
+[i _atrasoMin
+-> -> 20 `i `ui
+]
+"9
+[; ;yourcoffe.c: 9: unsigned int atrasoMed = 150;
+[v _atrasoMed `ui ~T0 @X0 1 e ]
+[i _atrasoMed
+-> -> 150 `i `ui
+]
+"10
+[; ;yourcoffe.c: 10: unsigned int atrasoMax = 1000;
+[v _atrasoMax `ui ~T0 @X0 1 e ]
+[i _atrasoMax
+-> -> 1000 `i `ui
+]
+"13
+[; ;yourcoffe.c: 13: char opcaoDesejada(char menu)
+[v _opcaoDesejada `(uc ~T0 @X0 1 ef1`uc ]
+"14
+[; ;yourcoffe.c: 14: {
+{
+[e :U _opcaoDesejada ]
+"13
+[; ;yourcoffe.c: 13: char opcaoDesejada(char menu)
+[v _menu `uc ~T0 @X0 1 r1 ]
+"14
+[; ;yourcoffe.c: 14: {
+[f ]
+"24
+[; ;yourcoffe.c: 24:     char tmp;
+[v _tmp `uc ~T0 @X0 1 a ]
+"25
+[; ;yourcoffe.c: 25:     if(menu != '3'){
+[e $ ! != -> _menu `ui -> 51 `ui 2  ]
+{
+"26
+[; ;yourcoffe.c: 26:         lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"27
+[; ;yourcoffe.c: 27:         lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"28
+[; ;yourcoffe.c: 28:         lcd_str("  PRESSIONE A");
+[e ( _lcd_str (1 :s 1C ]
+"29
+[; ;yourcoffe.c: 29:         lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"30
+[; ;yourcoffe.c: 30:         lcd_str(" OPCAO DESEJADA ");
+[e ( _lcd_str (1 :s 2C ]
+"31
+[; ;yourcoffe.c: 31:     }
+}
+[e :U 2 ]
+"33
+[; ;yourcoffe.c: 33:     while(1)
+[e :U 4 ]
+"34
+[; ;yourcoffe.c: 34:     {
+{
+"35
+[; ;yourcoffe.c: 35:         (*(volatile __near unsigned char*)0xF95) = 0x0F;
+[e = *U -> -> 3989 `i `*VNuc -> -> 15 `i `uc ]
+"36
+[; ;yourcoffe.c: 36:         tmp = tc_tecla(0) + 0x30;
+[e = _tmp -> + -> ( _tc_tecla (1 -> -> 0 `i `ui `i -> 48 `i `uc ]
+"37
+[; ;yourcoffe.c: 37:         (*(volatile __near unsigned char*)0xF95) = 0x00;
+[e = *U -> -> 3989 `i `*VNuc -> -> 0 `i `uc ]
+"38
+[; ;yourcoffe.c: 38:         if(menu == '1' && (tmp == '1' || tmp == '2' || tmp == '3' || tmp == '4'))
+[e $ ! && == -> _menu `ui -> 49 `ui || || || == -> _tmp `ui -> 49 `ui == -> _tmp `ui -> 50 `ui == -> _tmp `ui -> 51 `ui == -> _tmp `ui -> 52 `ui 6  ]
+"39
+[; ;yourcoffe.c: 39:             break;
+[e $U 5  ]
+[e $U 7  ]
+"40
+[; ;yourcoffe.c: 40:         else if((tmp == '1' || tmp == '2'))
+[e :U 6 ]
+[e $ ! || == -> _tmp `ui -> 49 `ui == -> _tmp `ui -> 50 `ui 8  ]
+"41
+[; ;yourcoffe.c: 41:             break;
+[e $U 5  ]
+[e :U 8 ]
+[e :U 7 ]
+"43
+[; ;yourcoffe.c: 43:     }
+}
+[e :U 3 ]
+[e $U 4  ]
+[e :U 5 ]
+"45
+[; ;yourcoffe.c: 45:     return tmp;
+[e ) _tmp ]
+[e $UE 1  ]
+"46
+[; ;yourcoffe.c: 46: }
+[e :UE 1 ]
+}
+"48
+[; ;yourcoffe.c: 48: void scrollDisplay(char *linha1, char *linha2)
+[v _scrollDisplay `(v ~T0 @X0 1 ef2`*uc`*uc ]
+"49
+[; ;yourcoffe.c: 49: {
+{
+[e :U _scrollDisplay ]
+"48
+[; ;yourcoffe.c: 48: void scrollDisplay(char *linha1, char *linha2)
+[v _linha1 `*uc ~T0 @X0 1 r1 ]
+[v _linha2 `*uc ~T0 @X0 1 r2 ]
+"49
+[; ;yourcoffe.c: 49: {
+[f ]
+"55
+[; ;yourcoffe.c: 55:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"56
+[; ;yourcoffe.c: 56:     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"57
+[; ;yourcoffe.c: 57:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"58
+[; ;yourcoffe.c: 58:     lcd_str(linha1);
+[e ( _lcd_str (1 -> _linha1 `*Cuc ]
+"59
+[; ;yourcoffe.c: 59:     lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"60
+[; ;yourcoffe.c: 60:     lcd_str(linha2);
+[e ( _lcd_str (1 -> _linha2 `*Cuc ]
+"61
+[; ;yourcoffe.c: 61:     atraso_ms(atrasoMax);
+[e ( _atraso_ms (1 -> _atrasoMax `i ]
+"63
+[; ;yourcoffe.c: 63:     for (i = 0; i < 14; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 14 `i 10  ]
+[e $U 11  ]
+[e :U 10 ]
+{
+"64
+[; ;yourcoffe.c: 64:         atraso_ms(atrasoMed);
+[e ( _atraso_ms (1 -> _atrasoMed `i ]
+"65
+[; ;yourcoffe.c: 65:         lcd_cmd(0x18);
+[e ( _lcd_cmd (1 -> -> 24 `i `uc ]
+"66
+[; ;yourcoffe.c: 66:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 14 `i 10  ]
+[e :U 11 ]
+}
+"68
+[; ;yourcoffe.c: 68:     for (i = 0; i < 22; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 22 `i 13  ]
+[e $U 14  ]
+[e :U 13 ]
+{
+"69
+[; ;yourcoffe.c: 69:         atraso_ms(atrasoMed);
+[e ( _atraso_ms (1 -> _atrasoMed `i ]
+"70
+[; ;yourcoffe.c: 70:         lcd_cmd(0x1C);
+[e ( _lcd_cmd (1 -> -> 28 `i `uc ]
+"71
+[; ;yourcoffe.c: 71:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 22 `i 13  ]
+[e :U 14 ]
+}
+"73
+[; ;yourcoffe.c: 73:     for (i = 0; i < 15; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 15 `i 16  ]
+[e $U 17  ]
+[e :U 16 ]
+{
+"74
+[; ;yourcoffe.c: 74:         atraso_ms(atrasoMed);
+[e ( _atraso_ms (1 -> _atrasoMed `i ]
+"75
+[; ;yourcoffe.c: 75:         lcd_cmd(0x18);
+[e ( _lcd_cmd (1 -> -> 24 `i `uc ]
+"76
+[; ;yourcoffe.c: 76:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 15 `i 16  ]
+[e :U 17 ]
+}
+"78
+[; ;yourcoffe.c: 78:     atraso_ms(atrasoMax);
+[e ( _atraso_ms (1 -> _atrasoMax `i ]
+"79
+[; ;yourcoffe.c: 79: }
+[e :UE 9 ]
+}
+"81
+[; ;yourcoffe.c: 81: void tempoPreparo(int segundos)
+[v _tempoPreparo `(v ~T0 @X0 1 ef1`i ]
+"82
+[; ;yourcoffe.c: 82: {
+{
+[e :U _tempoPreparo ]
+"81
+[; ;yourcoffe.c: 81: void tempoPreparo(int segundos)
+[v _segundos `i ~T0 @X0 1 r1 ]
+"82
+[; ;yourcoffe.c: 82: {
+[f ]
+"90
+[; ;yourcoffe.c: 90:     (((*(volatile __near unsigned char*)0xFF1)) &= ~(1<<7));
+[e =& *U -> -> 4081 `i `*VNuc -> ~ << -> 1 `i -> 7 `i `uc ]
+"91
+[; ;yourcoffe.c: 91:     (*(volatile __near unsigned char*)0xFC1) = 0x0E;
+[e = *U -> -> 4033 `i `*VNuc -> -> 14 `i `uc ]
+"92
+[; ;yourcoffe.c: 92:     (*(volatile __near unsigned char*)0xF95) = 0x00;
+[e = *U -> -> 3989 `i `*VNuc -> -> 0 `i `uc ]
+"93
+[; ;yourcoffe.c: 93:     (*(volatile __near unsigned char*)0xF92) = 0x00;
+[e = *U -> -> 3986 `i `*VNuc -> -> 0 `i `uc ]
+"94
+[; ;yourcoffe.c: 94:     (*(volatile __near unsigned char*)0xF93) = 0x00;
+[e = *U -> -> 3987 `i `*VNuc -> -> 0 `i `uc ]
+"95
+[; ;yourcoffe.c: 95:     (*(volatile __near unsigned char*)0xF81) = 0x00;
+[e = *U -> -> 3969 `i `*VNuc -> -> 0 `i `uc ]
+"96
+[; ;yourcoffe.c: 96:     const char valor[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
+[v F32 `Cuc ~T0 @X0 -> 10 `i s valor ]
+[i F32
+:U ..
+-> -> 63 `i `uc
+-> -> 6 `i `uc
+-> -> 91 `i `uc
+-> -> 79 `i `uc
+-> -> 102 `i `uc
+-> -> 109 `i `uc
+-> -> 125 `i `uc
+-> -> 7 `i `uc
+-> -> 127 `i `uc
+-> -> 111 `i `uc
+..
+]
+"97
+[; ;yourcoffe.c: 97:     const char leds[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+[v F33 `Cuc ~T0 @X0 -> 8 `i s leds ]
+[i F33
+:U ..
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+-> -> 8 `i `uc
+-> -> 16 `i `uc
+-> -> 32 `i `uc
+-> -> 64 `i `uc
+-> -> 128 `i `uc
+..
+]
+"98
+[; ;yourcoffe.c: 98:     char aux = 0;
+[v _aux `uc ~T0 @X0 1 a ]
+[e = _aux -> -> 0 `i `uc ]
+"99
+[; ;yourcoffe.c: 99:     unsigned int k, delay = 1000, i;
+[v _k `ui ~T0 @X0 1 a ]
+[v _delay `ui ~T0 @X0 1 a ]
+[e = _delay -> -> 1000 `i `ui ]
+[v _i `ui ~T0 @X0 1 a ]
+"100
+[; ;yourcoffe.c: 100:     while(1)
+[e :U 21 ]
+"101
+[; ;yourcoffe.c: 101:     {
+{
+"102
+[; ;yourcoffe.c: 102:         (*(volatile __near unsigned char*)0xF81) = leds[aux++]; if(aux == 8) aux = 0;
+[e = *U -> -> 3969 `i `*VNuc -> *U + &U F33 * -> ++ _aux -> -> 1 `i `uc `ux -> -> # *U &U F33 `ui `ux `uc ]
+[e $ ! == -> _aux `i -> 8 `i 23  ]
+[e = _aux -> -> 0 `i `uc ]
+[e :U 23 ]
+"103
+[; ;yourcoffe.c: 103:         for(i = 0; i < 50; i++)
+{
+[e = _i -> -> 0 `i `ui ]
+[e $ < _i -> -> 50 `i `ui 24  ]
+[e $U 25  ]
+[e :U 24 ]
+"104
+[; ;yourcoffe.c: 104:         {
+{
+"105
+[; ;yourcoffe.c: 105:             (*(volatile __near unsigned char*)0xF83) = valor[(segundos / 1) % 10];
+[e = *U -> -> 3971 `i `*VNuc -> *U + &U F32 * -> -> % / _segundos -> 1 `i -> 10 `i `ui `ux -> -> # *U &U F32 `ui `ux `uc ]
+"106
+[; ;yourcoffe.c: 106:             (((*(volatile __near unsigned char*)0xF80)) |= (1<<5));
+[e =| *U -> -> 3968 `i `*VNuc -> << -> 1 `i -> 5 `i `uc ]
+"107
+[; ;yourcoffe.c: 107:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<4));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"108
+[; ;yourcoffe.c: 108:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<3));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"109
+[; ;yourcoffe.c: 109:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<2));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 2 `i `uc ]
+"110
+[; ;yourcoffe.c: 110:             for(k = 0; k < delay; k++);
+{
+[e = _k -> -> 0 `i `ui ]
+[e $U 30  ]
+[e :U 27 ]
+[e ++ _k -> -> 1 `i `ui ]
+[e :U 30 ]
+[e $ < _k _delay 27  ]
+[e :U 28 ]
+}
+"111
+[; ;yourcoffe.c: 111:             (*(volatile __near unsigned char*)0xF83) = valor[(segundos / 10) % 10];
+[e = *U -> -> 3971 `i `*VNuc -> *U + &U F32 * -> -> % / _segundos -> 10 `i -> 10 `i `ui `ux -> -> # *U &U F32 `ui `ux `uc ]
+"112
+[; ;yourcoffe.c: 112:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<5));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"113
+[; ;yourcoffe.c: 113:             (((*(volatile __near unsigned char*)0xF80)) |= (1<<4));
+[e =| *U -> -> 3968 `i `*VNuc -> << -> 1 `i -> 4 `i `uc ]
+"114
+[; ;yourcoffe.c: 114:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<3));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"115
+[; ;yourcoffe.c: 115:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<2));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 2 `i `uc ]
+"116
+[; ;yourcoffe.c: 116:             for(k = 0; k < delay; k++);
+{
+[e = _k -> -> 0 `i `ui ]
+[e $U 34  ]
+[e :U 31 ]
+[e ++ _k -> -> 1 `i `ui ]
+[e :U 34 ]
+[e $ < _k _delay 31  ]
+[e :U 32 ]
+}
+"117
+[; ;yourcoffe.c: 117:             (*(volatile __near unsigned char*)0xF83) = valor[(segundos / 100) % 10];
+[e = *U -> -> 3971 `i `*VNuc -> *U + &U F32 * -> -> % / _segundos -> 100 `i -> 10 `i `ui `ux -> -> # *U &U F32 `ui `ux `uc ]
+"118
+[; ;yourcoffe.c: 118:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<5));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"119
+[; ;yourcoffe.c: 119:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<4));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"120
+[; ;yourcoffe.c: 120:             (((*(volatile __near unsigned char*)0xF80)) |= (1<<3));
+[e =| *U -> -> 3968 `i `*VNuc -> << -> 1 `i -> 3 `i `uc ]
+"121
+[; ;yourcoffe.c: 121:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<2));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 2 `i `uc ]
+"122
+[; ;yourcoffe.c: 122:             for(k = 0; k < delay; k++);
+{
+[e = _k -> -> 0 `i `ui ]
+[e $U 38  ]
+[e :U 35 ]
+[e ++ _k -> -> 1 `i `ui ]
+[e :U 38 ]
+[e $ < _k _delay 35  ]
+[e :U 36 ]
+}
+"123
+[; ;yourcoffe.c: 123:             (*(volatile __near unsigned char*)0xF83) = valor[(segundos / 1000) % 10];
+[e = *U -> -> 3971 `i `*VNuc -> *U + &U F32 * -> -> % / _segundos -> 1000 `i -> 10 `i `ui `ux -> -> # *U &U F32 `ui `ux `uc ]
+"124
+[; ;yourcoffe.c: 124:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<5));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"125
+[; ;yourcoffe.c: 125:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<4));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"126
+[; ;yourcoffe.c: 126:             (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<3));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"127
+[; ;yourcoffe.c: 127:             (((*(volatile __near unsigned char*)0xF80)) |= (1<<2));
+[e =| *U -> -> 3968 `i `*VNuc -> << -> 1 `i -> 2 `i `uc ]
+"128
+[; ;yourcoffe.c: 128:             for(k = 0; k < delay; k++);
+{
+[e = _k -> -> 0 `i `ui ]
+[e $U 42  ]
+[e :U 39 ]
+[e ++ _k -> -> 1 `i `ui ]
+[e :U 42 ]
+[e $ < _k _delay 39  ]
+[e :U 40 ]
+}
+"130
+[; ;yourcoffe.c: 130:         }
+}
+[e ++ _i -> -> 1 `i `ui ]
+[e $ < _i -> -> 50 `i `ui 24  ]
+[e :U 25 ]
+}
+"132
+[; ;yourcoffe.c: 132:         segundos--;
+[e -- _segundos -> 1 `i ]
+"134
+[; ;yourcoffe.c: 134:         if(segundos == -1) break;
+[e $ ! == _segundos -U -> 1 `i 43  ]
+[e $U 22  ]
+[e :U 43 ]
+"135
+[; ;yourcoffe.c: 135:     }
+}
+[e :U 20 ]
+[e $U 21  ]
+[e :U 22 ]
+"137
+[; ;yourcoffe.c: 137:     (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<5));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 5 `i `uc ]
+"138
+[; ;yourcoffe.c: 138:     (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<4));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 4 `i `uc ]
+"139
+[; ;yourcoffe.c: 139:     (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<3));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 3 `i `uc ]
+"140
+[; ;yourcoffe.c: 140:     (((*(volatile __near unsigned char*)0xF80)) &= ~(1<<2));
+[e =& *U -> -> 3968 `i `*VNuc -> ~ << -> 1 `i -> 2 `i `uc ]
+"141
+[; ;yourcoffe.c: 141:     (*(volatile __near unsigned char*)0xF81) = 0x00;
+[e = *U -> -> 3969 `i `*VNuc -> -> 0 `i `uc ]
+"143
+[; ;yourcoffe.c: 143: }
+[e :UE 19 ]
+}
+[a 1C 32 32 80 82 69 83 83 73 79 78 69 32 65 0 ]
+[a 2C 32 79 80 67 65 79 32 68 69 83 69 74 65 68 65 32 0 ]
