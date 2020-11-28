@@ -7,7 +7,7 @@ Na pasta "Arquivos" estão presentes todos os arquivos .c e .h utilizados no pro
 
 Na pasta "YourCoffe" está presente o projeto gerado pelo MPLab X IDE.
 
-Programador: Luiz Emanoel Batista Moreira
+Programador: Luiz Emanoel Batista Moreira - 
 Matrícula: 2019001202
 
 Os professores responsáveis pela condução da disciplina foram o professor Otávio Gomes (https://www.linkedin.com/in/otaviogomes/) e o professor Rodrigo Almeida (https://www.linkedin.com/in/rmaalmeida/).
