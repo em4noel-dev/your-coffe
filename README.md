@@ -11,3 +11,6 @@ Programador: Luiz Emanoel Batista Moreira -
 Matrícula: 2019001202
 
 Os professores responsáveis pela condução da disciplina foram o professor Otávio Gomes (https://www.linkedin.com/in/otavio-gomes/) e o professor Rodrigo Almeida (https://www.linkedin.com/in/rmaalmeida/).
+
+Link para acesso ao relatório:
+https://www.instructables.com/YourCoffe-Simulador-De-Uma-M%C3%A1quina-De-Caf%C3%A9-PIC18F4/?cb=1607548122
